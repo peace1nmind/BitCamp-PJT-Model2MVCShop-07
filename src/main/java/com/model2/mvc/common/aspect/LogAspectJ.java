@@ -1,5 +1,7 @@
 package com.model2.mvc.common.aspect;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /*
@@ -10,7 +12,7 @@ public class LogAspectJ {
 
 	///Constructor
 	public LogAspectJ() {
-		System.out.println("\nCommon :: "+this.getClass()+"\n");
+		System.out.println("\nCommon :: "+getClass().getSimpleName()+"\n");
 	}
 	
 	//Around  Advice
@@ -31,5 +33,17 @@ public class LogAspectJ {
 		
 		return obj;
 	}
+	
+	
+//	public Object logRequest(ProceedingJoinPoint joinPoint, 
+//							 HttpServletRequest request) 
+//							 throws Throwable {
+//		
+//		String uri = request.getRequestURI();
+//		
+//		System.out.println("\n[ Request URI ] " + uri);
+//		
+//		return joinPoint.proceed();
+//	}
 	
 }//end of class

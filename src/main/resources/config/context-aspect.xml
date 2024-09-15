@@ -19,6 +19,10 @@
 	 	<aop:aspect  ref="logAspect">
 	 		<aop:around 
 					pointcut="execution(* com.model2.mvc.service..*Impl.*(..) )"	method="invoke"/>
+			
+			<!-- Controller에 대한 Aspect 설정 -->
+<!-- 			<aop:around  -->
+<!-- 					pointcut="execution(* com.model2.mvc.web..*Controller.*(..))" method="logRequest"/> -->
 	 	</aop:aspect>
 	 </aop:config>
 
