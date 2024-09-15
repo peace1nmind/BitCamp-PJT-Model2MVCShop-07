@@ -17,6 +17,7 @@
 			<!--
 			function fncUpdateProduct(){
 				//Form 유효성 검증
+				console.log("fncUpdateProduct() is act");
 			 	var name = document.detailForm.prodName.value;
 				var detail = document.detailForm.prodDetail.value;
 				var manuDate = document.detailForm.manuDate.value;

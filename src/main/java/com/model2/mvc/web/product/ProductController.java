@@ -1,6 +1,7 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Paging;
@@ -188,13 +191,122 @@ public class ProductController {
 	}
 	
 	@PostMapping("/updateProduct")
-	public String updateProduct(@ModelAttribute("product") Product product,
-								Model model) throws Exception {
+	public String updateProduct(HttpServletRequest request) 
+								throws Exception {
 		
 		System.out.println("/updateProduct POST");
 		
-		product = productService.updateProduct(product);
-		model.addAttribute("product", product);
+		int no = 1;
+		
+		/* 파일 업로드 변경 필요 */
+		if (FileUpload.isMultipartContent(request)) {
+			String uploadDir = "F:BitCamp/workspace/07.Model2MVCShop(URI,pattern)/src/main/webapp/images/uploadFiles/";
+			
+			DiskFileUpload fileUpload = new DiskFileUpload();
+			fileUpload.setRepositoryPath(uploadDir);
+			
+			// 최대 업로드 사이즈 설정 (-1= 제한 없음)
+			// 1024 * 1024 * 10
+			fileUpload.setSizeMax(1024 * 1024 * 10);
+			fileUpload.setSizeThreshold(1024 * 100);
+			
+			System.out.println(request.getContentLength());
+			System.out.println(fileUpload.getSizeMax());
+			
+			if (request.getContentLength() < fileUpload.getSizeMax()) {
+				
+				Product product = new Product();
+				
+				// 문자열을 특정 구분자 기준으로 토큰(문자열 조각)으로 나누는데 사용하는 클래스(split 과 같음)
+				StringTokenizer token = null;
+				
+				List<FileItem> fileItemList = fileUpload.parseRequest(request);
+				
+				// html에서 받은 값들의 개수
+				int size = fileItemList.size();
+				
+				System.out.println(size);
+				
+				for (FileItem fileItem : fileItemList) {
+					System.out.println(fileItem);
+					// 파일 형식/파라미터 인지 확인 (파라미터면 true)
+					if (fileItem.isFormField()) {	// 파라미터라면
+						if (fileItem.getFieldName().equals("manuDate")) {
+							
+							String manuDate = "";
+							
+							if (fileItem.getString("euc-kr").contains("-")) {
+								token = new StringTokenizer(fileItem.getString("euc-kr"), "-");
+								manuDate = token.nextToken() + token.nextToken() + token.nextToken();
+							} else {
+								manuDate = fileItem.getString("euc-kr");
+							}
+							
+							product.setManuDate(manuDate);
+							
+						} else if (fileItem.getFieldName().equals("prodName")) {
+							product.setProdName(fileItem.getString("euc-kr"));
+							
+						} else if (fileItem.getFieldName().equals("prodDetail")) {
+							product.setProdDetail(fileItem.getString("euc-kr"));
+							
+						} else if (fileItem.getFieldName().equals("price")) {
+							product.setPrice(Integer.parseInt(fileItem.getString("euc-kr")));
+							
+						} else if (fileItem.getFieldName().equals("prodNo")) {
+							product.setProdNo(Integer.parseInt(fileItem.getString("euc-kr")));
+
+						}
+						
+						
+					} else { // 파일 형식이면
+						if (fileItem.getSize() > 0) { // 파일이 있으면
+							int index = (fileItem.getName().contains("\\"))? 
+											fileItem.getName().lastIndexOf("\\") : 
+											fileItem.getName().lastIndexOf("/");
+							
+							String fileName = fileItem.getName().substring(index+1);
+							
+							product.setFileName(fileName);
+							
+							try {
+								File uploadFile = new File(uploadDir, fileName);
+								fileItem.write(uploadFile);
+								
+								// 파일 업로드 처리 후
+								Thread.sleep(2000); // 2초 정도 대기
+								
+							} catch (Exception e) {
+								e.printStackTrace();
+								
+							}
+							
+						} else { // 파일이 없으면
+							product.setFileName("empty.GIF");
+							
+						}
+					}
+				} // for end	
+				
+				product = productService.updateProduct(product);
+				
+				request.setAttribute("product", product); 
+					
+			} else {
+				// 업로드하는 파일이 setSizeMax보다 큰 경우
+				int overSize = (request.getContentLength() / 1000000);
+				
+				System.out.println("<script>alert('파일의 크기는 1MB까지 됩니다. 올리신 파일 용량은 " + overSize + "MB 입니다.');");
+				System.out.println("history.back();</script>");
+			}
+			
+		} else {
+			System.out.println("인코딩 타입이 multipart/form-data가 아닙니다");
+		}
+		
+		
+//		product = productService.updateProduct(product);
+//		model.addAttribute("product", product);
 		
 		return "forward:/product/updateProduct.jsp";
 	}
@@ -213,15 +325,12 @@ public class ProductController {
 	public String addProduct(HttpServletRequest request) 
 							 throws Exception {
 		
-		int no = 1;
-		
 		System.out.println("/product/addProduct POST");
 		
 		/* Spring mvc 파일 업로드 참고하기 */
+		/* 파일 업로드 경로 메타데이터로 변경하기 */
 		if (FileUpload.isMultipartContent(request)) {
 			String uploadDir = "F:BitCamp/workspace/07.Model2MVCShop(URI,pattern)/src/main/webapp/images/uploadFiles/";
-			
-			System.out.println(String.format("if %d %s", no++, "s"));
 			
 			DiskFileUpload fileUpload = new DiskFileUpload();
 			fileUpload.setRepositoryPath(uploadDir);
@@ -234,8 +343,6 @@ public class ProductController {
 			System.out.println(request.getContentLength());
 			
 			if (request.getContentLength() < fileUpload.getSizeMax()) {
-				
-				System.out.println(String.format("if %d %s", no++, "s"));
 				
 				Product product = new Product();
 				
@@ -274,12 +381,7 @@ public class ProductController {
 											fileItem.getName().lastIndexOf("\\") : 
 											fileItem.getName().lastIndexOf("/");
 							
-							System.out.println(fileItem.getName());
-							System.out.println(index);
-							
 							String fileName = fileItem.getName().substring(index+1);
-							
-							System.out.println(fileName);
 							
 							product.setFileName(fileName);
 							
@@ -301,12 +403,8 @@ public class ProductController {
 						}
 					}
 				} // for end	
-				
-				System.out.println("before "+product);
-				
+
 				product = productService.addProduct(product);
-				
-				System.out.println("after "+product);
 				
 				request.setAttribute("product", product); 
 					

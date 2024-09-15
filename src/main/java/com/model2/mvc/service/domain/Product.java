@@ -41,7 +41,7 @@ public class Product {
 	}
 	
 	public void setFileName(String fileName) {
-		this.fileName = fileName;
+		this.fileName = fileName.trim();
 	}
 	
 	public String getManuDate() {
@@ -66,7 +66,7 @@ public class Product {
 	}
 	
 	public void setProdDetail(String prodDetail) {
-		this.prodDetail = prodDetail;
+		this.prodDetail = prodDetail.trim();
 	}
 	
 	public String getProdName() {
@@ -74,7 +74,7 @@ public class Product {
 	}
 	
 	public void setProdName(String prodName) {
-		this.prodName = prodName;
+		this.prodName = prodName.trim();
 	}
 	
 	public int getProdNo() {
@@ -96,7 +96,7 @@ public class Product {
 	// Override
 	public String toString() {
 		
-		return String.format("ProductVO : [prodNo] %d [prodName] %s [prdoDetail] %s "
+		return String.format("ProductVO : [prodNo] %d [prodName] %s [prodDetail] %s "
 				+ "\n\t [manuDate] %s [price] %d [fileName] %s  "
 				+ "\n\t [regDate] %s [proTranCode] %s ", 
 						prodNo, prodName, prodDetail, manuDate,price, fileName, regDate,proTranCode);
