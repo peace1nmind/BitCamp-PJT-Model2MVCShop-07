@@ -80,7 +80,7 @@
 						<td colspan="11" bgcolor="808285" height="1"></td>
 					</tr>
 					
-					<c:forEach var="purchase" items="${list }" varStatus="status">
+					<c:forEach var="purchase" items="${map.list }" varStatus="status">
 					
 						<tr class="ct_list_pop">
 							<td align="center">
