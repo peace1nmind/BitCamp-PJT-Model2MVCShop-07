@@ -112,9 +112,7 @@
 							<td align="left">
 							
 								<c:if test="${purchase.tranCode=='4' }">
-									<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo }
-																	 &tranCode=4
-																	 &page=${historyPaging.currentPage }">
+									<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo }">
 										구매확정
 									</a>
 								</c:if>

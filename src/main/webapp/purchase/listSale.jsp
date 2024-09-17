@@ -72,7 +72,7 @@
 							<td></td>
 							<%-- 상품명 --%>
 							<td align="left">
-								<a href="/getProduct.do?prodNo=${purchase.purchaseProd.prodNo }">
+								<a href="/product/getProduct?prodNo=${purchase.purchaseProd.prodNo }">
 									${purchase.purchaseProd.prodName }
 								</a>
 							</td>
@@ -113,8 +113,7 @@
 								<c:if test="${menu=='manage' && purchase.purchaseProd.proTranCode=='2' }">
 									&nbsp;
 									<%-- prodNo가 오면 updateTranCode(tranNo, tranCode) --%>
-									<a href="/purchase/updateTranCode?page=${salePaging.currentPage }
-																	 &prodNo=${purchase.purchaseProd.prodNo }
+									<a href="/purchase/updateTranCode?&prodNo=${purchase.purchaseProd.prodNo }
 																	 &tranCode=${purchase.purchaseProd.proTranCode }">
 										배송하기
 									</a>

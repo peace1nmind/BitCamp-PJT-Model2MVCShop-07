@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Purchase;
+import com.model2.mvc.service.product.ProductDao;
+import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseDao;
 import com.model2.mvc.service.purchase.PurchaseService;
+import com.model2.mvc.service.user.UserDao;
 
 @Service("purchaseServiceImpl")
 public class PurchaseServiceImpl implements PurchaseService {
@@ -20,6 +23,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Autowired
 	@Qualifier("purchaseDaoImpl")
 	private PurchaseDao purchaseDao;
+	
+	@Autowired
+	@Qualifier("productServiceImpl")
+	private ProductService productService;
 	
 	public void setPurchaseDao(PurchaseDao purchaseDao) {
 		this.purchaseDao = purchaseDao;
@@ -35,6 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		try {
 			purchaseDao.insertPurchase(purchase);
 			purchase = purchaseDao.selectPurchaseByProd(purchase.getPurchaseProd().getProdNo());
+			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), "2");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

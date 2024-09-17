@@ -1,3 +1,4 @@
+<%@page import="com.model2.mvc.service.domain.Product"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     

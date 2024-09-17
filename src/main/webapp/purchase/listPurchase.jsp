@@ -133,8 +133,7 @@
 									<c:when test="${purchase.tranCode == 3 }">
 									
 										<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo }
-																		 &tranCode=${purchase.tranCode }
-																		 &page=${paging.currentPage }">
+																		 &tranCode=${purchase.tranCode }">
 											¹°°ÇµµÂø
 										</a>
 									

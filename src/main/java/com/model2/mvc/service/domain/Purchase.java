@@ -215,8 +215,8 @@ public class Purchase {
 				+ "\n\t[tranCode] %s "
 				+ "\n\t[orderDate] %s [dlvyDate] %s ", 
 						tranNo, 
-						purchaseProd.toString(), 
-						buyer.toString(), 
+						purchaseProd, 
+						buyer, 
 						paymentOption, 
 						receiverName, receiverPhone, 
 						dlvyAddr, dlvyRequest, 

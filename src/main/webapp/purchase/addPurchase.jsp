@@ -36,7 +36,7 @@
 			</tr>
 		</table>
 		
-		<input type="hidden" name="prodNo" value="${product.prodNo }" />
+		<input type="hidden" name="prodNo" value="${purchase.purchaseProd.prodNo }" />
 		
 		<table width="600" border="0" cellspacing="0" cellpadding="0"	align="center" style="margin-top: 13px;">
 			<tr>
@@ -50,7 +50,7 @@
 				<td class="ct_write01" width="299">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td width="105">${product.prodNo }</td>
+							<td width="105">${purchase.purchaseProd.prodNo }</td>
 						</tr>
 					</table>
 				</td>
@@ -63,7 +63,7 @@
 					상품명 <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
 				</td>
 				<td bgcolor="D6D6D6" width="1"></td>
-				<td class="ct_write01">${product.prodName }</td>
+				<td class="ct_write01">${purchase.purchaseProd.prodName }</td>
 			</tr>
 			<tr>
 				<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -72,7 +72,7 @@
 			<tr>
 				<td width="104" class="ct_write">가격</td>
 				<td bgcolor="D6D6D6" width="1"></td>
-				<td class="ct_write01">${product.price }</td>
+				<td class="ct_write01">${purchase.purchaseProd.price }</td>
 			</tr>
 			
 			<tr>
@@ -83,8 +83,8 @@
 					구매자아이디 <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
 				</td>
 				<td bgcolor="D6D6D6" width="1"></td>
-				<td class="ct_write01">${buyer.userId }</td>
-				<input type="hidden" name="buyerId" value="${buyer.userId }" />
+				<td class="ct_write01">${purchase.buyer.userId }</td>
+				<input type="hidden" name="buyerId" value="${purchase.buyer.userId }" />
 			</tr>
 			<tr>
 				<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -104,7 +104,7 @@
 				<td width="104" class="ct_write">구매자 이름</td>
 				<td bgcolor="D6D6D6" width="1"></td>
 				<td class="ct_write01">
-					${buyer.userName }
+					${purchase.receiverName }
 				</td>
 			</tr>
 			<tr>
@@ -114,7 +114,7 @@
 				<td width="104" class="ct_write">구매자 연락처</td>
 				<td bgcolor="D6D6D6" width="1"></td>
 				<td class="ct_write01">
-					${buyer.phone }
+					${purchase.receiverPhone }
 				</td>
 			</tr>
 			<tr>

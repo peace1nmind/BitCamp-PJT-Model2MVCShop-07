@@ -71,7 +71,7 @@
 					<td class="ct_write01">
 
 						<c:if test="${!empty product.fileName }">
-							<img src = "/images/uploadFiles/${product.fileName }"/>
+							<img src = "/images/uploadFiles/${product.fileName }" width="300" height="300"/>
 						</c:if>
 
 					</td>

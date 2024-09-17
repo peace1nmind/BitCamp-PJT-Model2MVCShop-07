@@ -21,6 +21,10 @@ public class Product {
 	public Product(){
 	}
 	
+	public Product(int prodNo) {
+		this.prodNo = prodNo;
+	}
+	
 	public String getProTranCode() {
 		return proTranCode;
 	}
