@@ -203,7 +203,7 @@
 					<input 	type="text" readonly="readonly" name="dlvyDate" class="ct_input_g" 
 									style="width: 100px; height: 19px" maxLength="20"/>
 					<img 	src="../images/ct_icon_date.gif" width="15" height="15"	
-								onclick="show_calendar('document.addPurchase.dlvyDate', document.addPurchase.dlvyDate.value);dateFormate(document.addPurchase.dlvyDate.value);"/>
+								onclick="show_calendar('document.addPurchase.dlvyDate', document.addPurchase.dlvyDate.value);"/>
 				</td>
 			</tr>
 			<tr>
