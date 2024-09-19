@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Paging;
 import com.model2.mvc.common.Search;
+import com.model2.mvc.service.TranCodeMapper;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseService;
@@ -101,6 +102,7 @@ public class ProductController {
 			model.addAttribute("salePaging", salePaging);
 		}
 		
+		model.addAttribute("tranCodeMap", TranCodeMapper.getInstance().getMap());
 		
 		return "forward:/product/listProduct.jsp";
 	}

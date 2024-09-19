@@ -36,7 +36,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public Purchase selectPurchase(int tranNo) throws Exception {
+	public Purchase selectPurchase(int tranNo) {
 		Purchase purchase = sqlSession.selectOne("PurchaseMapper.selectPurchase", tranNo);
 		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
 		purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
@@ -45,7 +45,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public Purchase selectPurchaseByProd(int prodNo) throws Exception {
+	public Purchase selectPurchaseByProd(int prodNo) {
 		
 		Purchase purchase = sqlSession.selectOne("PurchaseMapper.selectPurchaseByProd", new Integer(prodNo));
 		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
@@ -55,13 +55,13 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public int insertPurchase(Purchase purchase) throws Exception {
+	public int insertPurchase(Purchase purchase) {
 
 		return sqlSession.insert("PurchaseMapper.insertPurchase", purchase);
 	}
 
 	@Override
-	public List<Purchase> selectPurchaseList(Search search, String buyerId) throws Exception {
+	public List<Purchase> selectPurchaseList(Search search, String buyerId) {
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.selectPurchaseList", 
 													buyerId, 
@@ -78,13 +78,13 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public int countPurchaseList(String buyerId) throws Exception {
+	public int countPurchaseList(String buyerId) {
 
 		return sqlSession.selectOne("PurchaseMapper.countPurchaseList", buyerId);
 	}
 
 	@Override
-	public List<Purchase> selectPurchaseHistoryList(Search search, String buyerId) throws Exception {
+	public List<Purchase> selectPurchaseHistoryList(Search search, String buyerId) {
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.selectPurchaseHistoryList", 
 													buyerId,
@@ -101,13 +101,13 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public int countPurchaseHistoryList(String buyerId) throws Exception {
+	public int countPurchaseHistoryList(String buyerId) {
 
 		return sqlSession.selectOne("PurchaseMapper.countPurchaseHistoryList", buyerId);
 	}
 
 	@Override
-	public List<Purchase> selectSaleList(Search search) throws Exception {
+	public List<Purchase> selectSaleList(Search search) {
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.selectSaleList", 
 													null, 
@@ -124,19 +124,19 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public int countSaleList() throws Exception {
+	public int countSaleList() {
 
 		return sqlSession.selectOne("PurchaseMapper.countSaleList");
 	}
 
 	@Override
-	public void updatePurchase(Purchase purchase) throws Exception {
+	public void updatePurchase(Purchase purchase) {
 		
 		sqlSession.update("PurchaseMapper.updatePurchase", purchase);
 	}
 
 	@Override
-	public void updateTranStatusCode(Purchase purchase) throws Exception {
+	public void updateTranStatusCode(Purchase purchase) {
 		
 		sqlSession.update("PurchaseMapper.updateTranStatusCode", purchase);
 	}

@@ -114,7 +114,7 @@
 									&nbsp;
 									<%-- prodNo가 오면 updateTranCode(tranNo, tranCode) --%>
 									<a href="/purchase/updateTranCode?&prodNo=${purchase.purchaseProd.prodNo }
-																	 &tranCode=${purchase.purchaseProd.proTranCode }">
+																		&tranCode=3">
 										배송하기
 									</a>
 								</c:if>

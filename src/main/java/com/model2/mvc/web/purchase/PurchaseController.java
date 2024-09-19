@@ -185,27 +185,38 @@ public class PurchaseController {
 	}
 	
 	
-	// 배송하기
+	// 배송하기, 물건도착
 	// listSale (관리자)에서 배송하기 요청
-	@RequestMapping(value="/updateTranCode", params = "prodNo")
-	public ModelAndView updateTranCode(@RequestParam("prodNo") int prodNo) {
+	@RequestMapping()
+	public ModelAndView updateTranCode(@RequestParam(value = "prodNo", required = false, defaultValue = "0") int prodNo,
+									   @RequestParam(value = "tranNo", required = false, defaultValue = "0") int tranNo,
+									   @RequestParam(value = "tranCode") String tranCode) {
 		
-		System.out.println("/updateTranCode?prodNo");
+		System.out.println("/updateTranCode?"+((prodNo != 0)? "prodNo" : "tranNo"));
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/product/listProduct?menu=manage");
+		System.out.println(tranCode);
 		
-		Purchase purchase = purchaseService.getPurchaseByProd(prodNo);
+		ModelAndView modelAndView = new ModelAndView();
 		
-		if (purchase.getTranCode().equals("2")) {
-			purchaseService.updateTranCode(purchase, "3");
+		if (tranNo == 0 && prodNo != 0) {	// 배송하기
+			modelAndView.setViewName("redirect:/product/listProduct?menu=manage");
+			
+			Purchase purchase = purchaseService.getPurchaseByProd(prodNo);
+			
+			purchaseService.updateTranCode(purchase, tranCode);
+			productService.updateTranCode(prodNo, tranCode);
+			
+		} else if (tranNo != 0 && prodNo == 0) {	// 물건도착, 구매확정
+			modelAndView.setViewName("redirect:/purchase/listPurchase");
+			
+			Purchase purchase = purchaseService.getPurchase(tranNo);
+			
+			purchaseService.updateTranCode(tranNo, tranCode);
+			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), tranCode);
 		}
 		
 		return modelAndView;
 	}
-	
-	
-	// 물건도착
-	
 
 }
 // class end
