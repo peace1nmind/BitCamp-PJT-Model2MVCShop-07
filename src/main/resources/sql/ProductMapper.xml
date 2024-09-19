@@ -48,6 +48,15 @@
 					</otherwise>
 				</choose>
 			</if>
+			
+			<!-- 가격 범위검색 -->
+			<if test="searchPriceBigger != 0">
+				AND price &gt;= #{searchPriceBigger:INTEGER}
+			</if>
+			<if test="searchPriceLess != 0">
+				AND price &lt;= #{searchPriceLess:INTEGER}
+			</if>
+			
 		</where>
 		
 		<trim prefix="ORDER BY" prefixOverrides=",">
@@ -89,6 +98,15 @@
 							</otherwise>
 						</choose>
 					</if>
+					
+					<!-- 가격 범위검색 -->
+					<if test="searchPriceBigger != 0">
+						AND price &gt;= #{searchPriceBigger:INTEGER}
+					</if>
+					<if test="searchPriceLess != 0">
+						AND price &lt;= #{searchPriceLess:INTEGER}
+					</if>
+						
 				</where>
 				
 			 ) countTable

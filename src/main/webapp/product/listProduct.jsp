@@ -16,7 +16,15 @@
 		<script type="text/javascript">
 		<!--
 		function fncGetProductList(){
-			document.detailForm.submit();
+			var bigger = document.detailForm.searchPriceBigger;
+			var less = document.detailForm.searchPriceLess;
+			if (bigger.value - less.value > 0 && bigger.value - less.value != bigger.value) {
+				alert("가격 범위가 올바르지 않습니다");
+				document.detailForm.searchPriceBigger.focus();
+				document.detailForm.searchPriceBigger.setSelectionRange(document.detailForm.searchPriceBigger.value.length, document.detailForm.searchPriceBigger.value.length);
+			} else {
+				document.detailForm.submit();
+			}
 		}
 		-->
 		
@@ -74,13 +82,42 @@
 								<option value="1" ${(!empty search.searchCondition && search.searchCondition=='1')? "selected":""}>
 									상품명
 								</option>
-								<option value="2" ${(!empty search.searchCondition && search.searchCondition=='2')? "selected":""}>
+								<%-- <option value="2" ${(!empty search.searchCondition && search.searchCondition=='2')? "selected":""}>
 									상품가격
-								</option>
+								</option> --%>
 								
 							</select>
 							
 							<input type="text" name="searchKeyword" value="${search.searchKeyword}" 
+									class="ct_input_g" style="width:200px; height:19px" />
+							
+						</td>
+						
+						<td align="right" width="70">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="17" height="23">
+										<img src="/images/ct_btnbg01.gif" width="17" height="23">
+									</td>
+									<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
+										<a href="javascript:fncGetProductList();">검색</a>
+									</td>
+									<td width="14" height="23">
+										<img src="/images/ct_btnbg03.gif" width="14" height="23">
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+					<tr>
+						<td align="right">
+							<input type="number" name="searchPriceBigger" value="${search.searchPriceBigger}" 
+									class="ct_input_g" style="width:200px; height:19px" />
+							~
+							<input type="number" name="searchPriceLess" value="${search.searchPriceLess}" 
 									class="ct_input_g" style="width:200px; height:19px" />
 							
 						</td>
@@ -167,7 +204,9 @@
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
 															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}" 
+															&salePage=${salePaging.currentPage}
+															&searchPriceBigger=${search.searchPriceBigger}
+															&searchPriceLess=${search.searchPriceLess}" 
 							${(paging.left)? "":"class='disabled'"}>
 								<span>◀</span>
 							</a>
@@ -180,7 +219,9 @@
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
 															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}" 
+															&salePage=${salePaging.currentPage}
+															&searchPriceBigger=${search.searchPriceBigger}
+															&searchPriceLess=${search.searchPriceLess}" 
 							${(paging.left)? "":"class='disabled'"}>
 								<span>이전</span>
 							</a>
@@ -194,7 +235,9 @@
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
 															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}" 
+															&salePage=${salePaging.currentPage}
+															&searchPriceBigger=${search.searchPriceBigger}
+															&searchPriceLess=${search.searchPriceLess}" 
 							${(paging.currentPage==i)? "style='font-weight: bold; font-size: 15px'" : ""}>
 								${i}
 							</a>
@@ -209,7 +252,9 @@
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
 															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}" 
+															&salePage=${salePaging.currentPage}
+															&searchPriceBigger=${search.searchPriceBigger}
+															&searchPriceLess=${search.searchPriceLess}" 
 							${(paging.right)? "":"class='disabled'"}>
 								<span>다음</span>
 							</a>
@@ -222,7 +267,9 @@
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
 															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}" 
+															&salePage=${salePaging.currentPage}
+															&searchPriceBigger=${search.searchPriceBigger}
+															&searchPriceLess=${search.searchPriceLess}" 
 							${(paging.right)? "":"class='disabled'"}>
 								<span>▶</span>
 							</a>
