@@ -67,6 +67,22 @@ public class PurchaseServiceImpl implements PurchaseService {
 		
 		return purchase;
 	}
+	
+	@Override
+	public Purchase getPurchaseByProd(int prodNo) {
+		
+		Purchase purchase = new Purchase();
+		
+		try {
+			purchase = purchaseDao.selectPurchaseByProd(prodNo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return purchase;
+	}
 
 	@Override
 	public Map<String, Object> getPurchaseList(Search search, String buyerId) {

@@ -165,7 +165,9 @@
 															&menu=${menu}
 															&searchCondition=${search.searchCondition}
 															&searchKeyword=${search.searchKeyword}
-															&orderBy=${search.orderBy}&desc=${search.desc}" 
+															&orderBy=${search.orderBy}
+															&desc=${search.desc}
+															&salePage=${salePaging.currentPage}" 
 							${(paging.left)? "":"class='disabled'"}>
 								<span>◀</span>
 							</a>
@@ -177,7 +179,8 @@
 															&searchCondition=${search.searchCondition}
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
-															&desc=${search.desc}" 
+															&desc=${search.desc}
+															&salePage=${salePaging.currentPage}" 
 							${(paging.left)? "":"class='disabled'"}>
 								<span>이전</span>
 							</a>
@@ -190,7 +193,8 @@
 															&searchCondition=${search.searchCondition}
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
-															&desc=${search.desc}" 
+															&desc=${search.desc}
+															&salePage=${salePaging.currentPage}" 
 							${(paging.currentPage==i)? "style='font-weight: bold; font-size: 15px'" : ""}>
 								${i}
 							</a>
@@ -204,7 +208,8 @@
 															&searchCondition=${search.searchCondition}
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
-															&desc=${search.desc}" 
+															&desc=${search.desc}
+															&salePage=${salePaging.currentPage}" 
 							${(paging.right)? "":"class='disabled'"}>
 								<span>다음</span>
 							</a>
@@ -216,7 +221,8 @@
 															&searchCondition=${search.searchCondition}
 															&searchKeyword=${search.searchKeyword}
 															&orderBy=${search.orderBy}
-															&desc=${search.desc}" 
+															&desc=${search.desc}
+															&salePage=${salePaging.currentPage}" 
 							${(paging.right)? "":"class='disabled'"}>
 								<span>▶</span>
 							</a>

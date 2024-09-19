@@ -146,16 +146,24 @@
 					<tr>
 						<td align="center">
 
-							<a href="/product/listProduct?menu=manage
-														 &salePage=1" 
+							<a href="/product/listProduct?page=${paging.currentPage }
+															&menu=${menu}
+															&searchCondition=${search.searchCondition}
+															&searchKeyword=${search.searchKeyword}
+															&orderBy=${search.orderBy}&desc=${search.desc}
+															&salePage=1" 
 							${(salePaging.left)? "":"class='disabled'" }>
 								<span>◀</span>
 							</a>
 							
 							&nbsp;
 							
-							<a href="/product/listProduct?menu=manage
-														 &salePage=${salePaging.start - 1 }" 
+							<a href="/product/listProduct?page=${paging.currentPage }
+															&menu=${menu}
+															&searchCondition=${search.searchCondition}
+															&searchKeyword=${search.searchKeyword}
+															&orderBy=${search.orderBy}&desc=${search.desc}
+															&salePage=${salePaging.start - 1 }" 
 							${(salePaging.left)? "":"class='disabled'" }>
 								<span>이전</span>
 							</a>
@@ -164,8 +172,12 @@
 							
 							<c:forEach begin="${salePaging.start }" end="${salePaging.end }" varStatus="status">
 							
-								<a href="/product/listProduct?menu=manage
-															 &salePage=${status.count }" 
+								<a href="/product/listProduct?page=${paging.currentPage }
+																&menu=${menu}
+																&searchCondition=${search.searchCondition}
+																&searchKeyword=${search.searchKeyword}
+																&orderBy=${search.orderBy}&desc=${search.desc}
+																&salePage=${status.count }" 
 								${(salePaging.currentPage==status.count)? "style='font-weight: bold; font-size: 15px'" : "" }>
 									${status.count }
 								</a> 
@@ -174,16 +186,24 @@
 
 							&nbsp;&nbsp;
 							
-							<a href="/product/listProduct?menu=manage
-														 &salePage=${salePaging.end + 1 }" 
+							<a href="/product/listProduct?page=${paging.currentPage }
+															&menu=${menu}
+															&searchCondition=${search.searchCondition}
+															&searchKeyword=${search.searchKeyword}
+															&orderBy=${search.orderBy}&desc=${search.desc}
+															&salePage=${salePaging.end + 1 }" 
 							${(salePaging.right)? "":"class='disabled'" }>
 								<span>다음</span>
 							</a>
 							
 							&nbsp;
 							
-							<a href="/product/listProduct?menu=manage
-														 &salePage=${salePaging.totalPage }" 
+							<a href="/product/listProduct?page=${paging.currentPage }
+															&menu=${menu}
+															&searchCondition=${search.searchCondition}
+															&searchKeyword=${search.searchKeyword}
+															&orderBy=${search.orderBy}&desc=${search.desc}
+															&salePage=${salePaging.totalPage }" 
 							${(salePaging.right)? "":"class='disabled'" }>
 								<span>▶</span>
 							</a>

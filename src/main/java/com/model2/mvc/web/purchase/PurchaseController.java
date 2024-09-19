@@ -190,9 +190,15 @@ public class PurchaseController {
 	@RequestMapping(value="/updateTranCode", params = "prodNo")
 	public ModelAndView updateTranCode(@RequestParam("prodNo") int prodNo) {
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/product/listProduct?manu=manage");
+		System.out.println("/updateTranCode?prodNo");
 		
-		// TODO prodNo로 tranCode를 2에서 3으로 변경하기
+		ModelAndView modelAndView = new ModelAndView("redirect:/product/listProduct?menu=manage");
+		
+		Purchase purchase = purchaseService.getPurchaseByProd(prodNo);
+		
+		if (purchase.getTranCode().equals("2")) {
+			purchaseService.updateTranCode(purchase, "3");
+		}
 		
 		return modelAndView;
 	}

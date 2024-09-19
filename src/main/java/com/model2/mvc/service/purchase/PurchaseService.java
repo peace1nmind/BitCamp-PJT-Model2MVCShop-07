@@ -13,6 +13,7 @@ public interface PurchaseService {
 	
 	// 구매정보 조회
 	public Purchase getPurchase(int tranNo);
+	public Purchase getPurchaseByProd(int prodNo);
 	
 	// 구매이력 조회 (구매완료~배송중)
 	public Map<String, Object> getPurchaseList(Search search, String buyerId);
