@@ -141,11 +141,7 @@
 								<c:choose>
 								
 									<c:when test="${purchase.tranCode == 3 }">
-<%-- 									/purchase/updateTranCode?tranNo=${purchase.tranNo }&tranCode=4 --%>
-										<input type="button" value="물건도착" onclick="fncUpdateTranCode(${purchase.tranNo}, 4)">
-											
-										
-									
+										<a onclick="fncUpdateTranCode(${purchase.tranNo}, 4)">물건도착</a>
 									</c:when>
 									
 									<%-- 정보수정 : 배송완료전이면 배송지 수정하게끔 **4=배송완료 --%>
