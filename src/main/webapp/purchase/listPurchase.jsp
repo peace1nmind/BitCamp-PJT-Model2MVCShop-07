@@ -31,6 +31,16 @@
 	        }
 	        
     	</style>
+    	
+    	<script type="text/javascript">
+    		
+    		function fncUpdateTranCode(tranNo, tranCode) {
+    			if(confirm("배송정보를 변경하시겠습니까?\n\n배송중 → 배송완료")) {
+    				window.location.href="/purchase/updateTranCode?tranNo="+tranNo+"&tranCode="+tranCode;
+    			}
+    		}
+    	
+    	</script>
 		
 	</head>
 	
@@ -131,10 +141,10 @@
 								<c:choose>
 								
 									<c:when test="${purchase.tranCode == 3 }">
-									
-										<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo }&tranCode=4">
-											물건도착
-										</a>
+<%-- 									/purchase/updateTranCode?tranNo=${purchase.tranNo }&tranCode=4 --%>
+										<input type="button" value="물건도착" onclick="fncUpdateTranCode(${purchase.tranNo}, 4)">
+											
+										
 									
 									</c:when>
 									
